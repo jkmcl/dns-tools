@@ -19,27 +19,23 @@ public class MXRecordFinderTests {
 
 	@Test
 	public void testLookUpShuffleAndSort() throws Exception {
-		MXRecordFinder finder = new MXRecordFinder();
-
-		List<MXRecord> records = finder.lookUp(MAIL_HOST);
+		List<MXRecord> records = MXRecordFinder.lookUp(MAIL_HOST);
 		log.info("List before shuffling and sorting:");
 		logRecords(records);
 
-		finder.shuffleAndSort(records);
+		MXRecordFinder.shuffleAndSort(records);
 		log.info("List after shuffling and sorting:");
 		logRecords(records);
 	}
 
 	@Test
 	public void testFindRecords() throws Exception {
-		MXRecordFinder finder = new MXRecordFinder();
-		logRecords(finder.findRecords(MAIL_HOST));
+		logRecords(MXRecordFinder.findRecords(MAIL_HOST));
 	}
 
 	@Test
 	public void testFindHosts() throws Exception {
-		MXRecordFinder finder = new MXRecordFinder();
-		finder.findHosts(MAIL_HOST).forEach(c -> log.info(c));
+		MXRecordFinder.findHosts(MAIL_HOST).forEach(c -> log.info(c));
 	}
 
 }
