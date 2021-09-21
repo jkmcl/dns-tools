@@ -1,5 +1,8 @@
 package jkml;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -7,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xbill.DNS.MXRecord;
 
-public class MXRecordFinderTests {
+class MXRecordFinderTests {
 
 	private static final String MAIL_HOST = "gmail.com";
 
@@ -18,24 +21,32 @@ public class MXRecordFinderTests {
 	}
 
 	@Test
-	public void testLookUpShuffleAndSort() throws Exception {
+	void testLookUpShuffleAndSort() throws Exception {
 		List<MXRecord> records = MXRecordFinder.lookUp(MAIL_HOST);
+		int beforeCount = records.size();
 		log.info("List before shuffling and sorting:");
 		logRecords(records);
 
 		MXRecordFinder.shuffleAndSort(records);
+		int afterCount = records.size();
 		log.info("List after shuffling and sorting:");
 		logRecords(records);
+
+		assertEquals(beforeCount, afterCount);
 	}
 
 	@Test
-	public void testFindRecords() throws Exception {
+	void testFindRecords() throws Exception {
+		List<MXRecord> records = MXRecordFinder.findRecords(MAIL_HOST);
+		assertFalse(records.isEmpty());
 		logRecords(MXRecordFinder.findRecords(MAIL_HOST));
 	}
 
 	@Test
-	public void testFindHosts() throws Exception {
-		MXRecordFinder.findHosts(MAIL_HOST).forEach(c -> log.info(c));
+	void testFindHosts() throws Exception {
+		List<String> hosts = MXRecordFinder.findHosts(MAIL_HOST);
+		assertFalse(hosts.isEmpty());
+		hosts.forEach(c -> log.info(c));
 	}
 
 }

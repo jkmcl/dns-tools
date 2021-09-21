@@ -13,6 +13,9 @@ import org.xbill.DNS.Type;
 
 public class MXRecordFinder {
 
+	private MXRecordFinder() {
+	}
+
 	public static List<MXRecord> lookUp(String name) throws IOException {
 		List<MXRecord> mxRecords = new ArrayList<>(0);
 		Record[] records = new Lookup(name, Type.MX).run();
