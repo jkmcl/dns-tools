@@ -17,12 +17,13 @@ public class MXRecordFinder {
 	}
 
 	public static List<MXRecord> lookUp(String name) throws IOException {
-		List<MXRecord> mxRecords = new ArrayList<>(0);
 		Record[] records = new Lookup(name, Type.MX).run();
-		if (records != null) {
-			for (Record r : records) {
-				mxRecords.add((MXRecord) r);
-			}
+		if (records == null) {
+			return List.of();
+		}
+		List<MXRecord> mxRecords = new ArrayList<>(records.length);
+		for (Record r : records) {
+			mxRecords.add((MXRecord) r);
 		}
 		return mxRecords;
 	}
