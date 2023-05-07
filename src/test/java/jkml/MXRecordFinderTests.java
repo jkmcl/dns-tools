@@ -17,18 +17,18 @@ class MXRecordFinderTests {
 	private final Logger log = LoggerFactory.getLogger(MXRecordFinderTests.class);
 
 	private void logRecords(List<MXRecord> records) {
-		records.forEach(r -> log.info("{} {}", r.getTarget(), r.getPriority()));
+		records.forEach(r -> log.info("{} (priority: {})", r.getTarget().toString(true), r.getPriority()));
 	}
 
 	@Test
 	void testLookUpShuffleAndSort() throws Exception {
-		List<MXRecord> records = MXRecordFinder.lookUp(MAIL_HOST);
-		int beforeCount = records.size();
+		var records = MXRecordFinder.lookUp(MAIL_HOST);
+		var beforeCount = records.size();
 		log.info("List before shuffling and sorting:");
 		logRecords(records);
 
 		MXRecordFinder.shuffleAndSort(records);
-		int afterCount = records.size();
+		var afterCount = records.size();
 		log.info("List after shuffling and sorting:");
 		logRecords(records);
 
@@ -37,14 +37,14 @@ class MXRecordFinderTests {
 
 	@Test
 	void testFindRecords() throws Exception {
-		List<MXRecord> records = MXRecordFinder.findRecords(MAIL_HOST);
+		var records = MXRecordFinder.findRecords(MAIL_HOST);
 		assertFalse(records.isEmpty());
 		logRecords(MXRecordFinder.findRecords(MAIL_HOST));
 	}
 
 	@Test
 	void testFindHosts() throws Exception {
-		List<String> hosts = MXRecordFinder.findHosts(MAIL_HOST);
+		var hosts = MXRecordFinder.findHosts(MAIL_HOST);
 		assertFalse(hosts.isEmpty());
 		hosts.forEach(c -> log.info(c));
 	}

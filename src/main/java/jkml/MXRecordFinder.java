@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.xbill.DNS.Lookup;
 import org.xbill.DNS.MXRecord;
-import org.xbill.DNS.Record;
 import org.xbill.DNS.Type;
 
 public class MXRecordFinder {
@@ -17,31 +16,31 @@ public class MXRecordFinder {
 	}
 
 	public static List<MXRecord> lookUp(String name) throws IOException {
-		Record[] records = new Lookup(name, Type.MX).run();
-		if (records == null) {
-			return List.of();
+		var answers = new Lookup(name, Type.MX).run();
+		if (answers == null) {
+			return new ArrayList<>();
 		}
-		List<MXRecord> mxRecords = new ArrayList<>(records.length);
-		for (Record r : records) {
-			mxRecords.add((MXRecord) r);
+
+		var records = new ArrayList<MXRecord>(answers.length);
+		for (var ans : answers) {
+			records.add((MXRecord) ans);
 		}
-		return mxRecords;
-	}
-
-	static void shuffleAndSort(List<MXRecord> records) {
-		Collections.shuffle(records);
-		records.sort(Comparator.comparingInt(MXRecord::getPriority));
-	}
-
-	public static List<MXRecord> findRecords(String name) throws IOException {
-		List<MXRecord> records = lookUp(name);
-		shuffleAndSort(records);
 		return records;
 	}
 
+	static List<MXRecord> shuffleAndSort(List<MXRecord> records) {
+		Collections.shuffle(records);
+		records.sort(Comparator.comparingInt(MXRecord::getPriority));
+		return records;
+	}
+
+	public static List<MXRecord> findRecords(String name) throws IOException {
+		return shuffleAndSort(lookUp(name));
+	}
+
 	public static List<String> findHosts(String name) throws IOException {
-		List<MXRecord> records = findRecords(name);
-		List<String> hosts = new ArrayList<>(records.size());
+		var records = findRecords(name);
+		var hosts = new ArrayList<String>(records.size());
 		records.forEach(r -> hosts.add(r.getTarget().toString(true)));
 		return hosts;
 	}
