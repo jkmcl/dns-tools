@@ -39,7 +39,7 @@ class MXRecordFinderTests {
 	void testFindRecords() throws Exception {
 		var records = MXRecordFinder.findRecords(MAIL_HOST);
 		assertFalse(records.isEmpty());
-		logRecords(MXRecordFinder.findRecords(MAIL_HOST));
+		logRecords(records);
 	}
 
 	@Test
