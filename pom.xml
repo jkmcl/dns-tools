@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.11</version>
+		<version>2.7.17</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -18,7 +18,7 @@
 
 	<properties>
 		<java.version>11</java.version>
-		<dnsjava.version>3.5.2</dnsjava.version>
+		<dnsjava.version>3.5.3</dnsjava.version>
 	</properties>
 
 	<dependencies>
