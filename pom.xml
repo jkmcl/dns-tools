@@ -18,7 +18,7 @@
 
 	<properties>
 		<java.version>11</java.version>
-		<dnsjava.version>3.5.3</dnsjava.version>
+		<dnsjava.version>3.6.0</dnsjava.version>
 	</properties>
 
 	<dependencies>
