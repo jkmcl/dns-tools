@@ -46,7 +46,7 @@ class MXRecordFinderTests {
 	void testFindHosts() throws Exception {
 		var hosts = MXRecordFinder.findHosts(MAIL_HOST);
 		assertFalse(hosts.isEmpty());
-		hosts.forEach(c -> log.info(c));
+		hosts.forEach(log::info);
 	}
 
 }
