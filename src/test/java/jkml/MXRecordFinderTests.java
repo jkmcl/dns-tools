@@ -14,22 +14,22 @@ class MXRecordFinderTests {
 
 	private static final String MAIL_HOST = "gmail.com";
 
-	private final Logger log = LoggerFactory.getLogger(MXRecordFinderTests.class);
+	private final Logger logger = LoggerFactory.getLogger(MXRecordFinderTests.class);
 
 	private void logRecords(List<MXRecord> records) {
-		records.forEach(r -> log.info("{} (priority: {})", r.getTarget().toString(true), r.getPriority()));
+		records.forEach(r -> logger.info("{} (priority: {})", r.getTarget().toString(true), r.getPriority()));
 	}
 
 	@Test
 	void testLookUpShuffleAndSort() throws Exception {
 		var records = MXRecordFinder.lookUp(MAIL_HOST);
 		var beforeCount = records.size();
-		log.info("List before shuffling and sorting:");
+		logger.info("List before shuffling and sorting:");
 		logRecords(records);
 
 		MXRecordFinder.shuffleAndSort(records);
 		var afterCount = records.size();
-		log.info("List after shuffling and sorting:");
+		logger.info("List after shuffling and sorting:");
 		logRecords(records);
 
 		assertEquals(beforeCount, afterCount);
@@ -46,7 +46,7 @@ class MXRecordFinderTests {
 	void testFindHosts() throws Exception {
 		var hosts = MXRecordFinder.findHosts(MAIL_HOST);
 		assertFalse(hosts.isEmpty());
-		hosts.forEach(log::info);
+		hosts.forEach(logger::info);
 	}
 
 }
