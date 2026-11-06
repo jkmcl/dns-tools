@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xbill.DNS.MXRecord;
@@ -14,10 +16,15 @@ class MXRecordFinderTests {
 
 	private static final String MAIL_HOST = "gmail.com";
 
-	private final Logger logger = LoggerFactory.getLogger(MXRecordFinderTests.class);
+	private static final Logger logger = LoggerFactory.getLogger(MXRecordFinderTests.class);
 
 	private void logRecords(List<MXRecord> records) {
 		records.forEach(r -> logger.info("{} (priority: {})", r.getTarget().toString(true), r.getPriority()));
+	}
+
+	@BeforeEach
+	void beforeEach(TestInfo testInfo) {
+		logger.info("# Start of test: {}", testInfo.getDisplayName());
 	}
 
 	@Test

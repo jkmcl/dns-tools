@@ -14,11 +14,11 @@
 
 	<groupId>jkml</groupId>
 	<artifactId>dns-tools</artifactId>
-	<version>3.0.0</version>
+	<version>3.0.0-SNAPSHOT</version>
 
 	<properties>
 		<java.version>17</java.version>
-		<dnsjava.version>3.7.0</dnsjava.version>
+		<dnsjava.version>3.7.1</dnsjava.version>
 	</properties>
 
 	<dependencies>

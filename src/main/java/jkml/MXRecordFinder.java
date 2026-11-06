@@ -15,7 +15,7 @@ public class MXRecordFinder {
 	private MXRecordFinder() {
 	}
 
-	public static List<MXRecord> lookUp(String name) throws IOException {
+	static List<MXRecord> lookUp(String name) throws IOException {
 		var answers = new Lookup(name, Type.MX).run();
 		if (answers == null) {
 			return new ArrayList<>();
